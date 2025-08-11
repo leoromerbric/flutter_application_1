@@ -1,5 +1,5 @@
 /// Configuración de temas para la aplicación
-/// 
+///
 /// Este archivo contiene la configuración del tema Material 3 para la aplicación,
 /// incluyendo colores, tipografía y otros aspectos visuales.
 library;
@@ -14,15 +14,15 @@ class AppTheme {
   /// Esquema de colores principal para el tema claro
   static const ColorScheme _lightColorScheme = ColorScheme(
     brightness: Brightness.light,
-    primary: Color(0xFF6750A4),
-    onPrimary: Color(0xFFFFFFFF),
-    primaryContainer: Color(0xFFEADDFF),
-    onPrimaryContainer: Color(0xFF21005D),
-    secondary: Color(0xFF625B71),
-    onSecondary: Color(0xFFFFFFFF),
-    secondaryContainer: Color(0xFFE8DEF8),
-    onSecondaryContainer: Color(0xFF1D192B),
-    tertiary: Color(0xFF7D5260),
+    primary: Color.fromARGB(255, 80, 164, 94),
+    onPrimary: Color.fromARGB(255, 255, 255, 255),
+    primaryContainer: Color.fromARGB(255, 221, 255, 222),
+    onPrimaryContainer: Color.fromARGB(255, 0, 93, 51),
+    secondary: Color.fromARGB(255, 91, 113, 104),
+    onSecondary: Color.fromARGB(255, 255, 255, 255),
+    secondaryContainer: Color.fromARGB(255, 222, 248, 230),
+    onSecondaryContainer: Color.fromARGB(255, 25, 43, 31),
+    tertiary: Color.fromARGB(255, 82, 125, 85),
     onTertiary: Color(0xFFFFFFFF),
     tertiaryContainer: Color(0xFFFFD8E4),
     onTertiaryContainer: Color(0xFF31111D),
@@ -33,29 +33,29 @@ class AppTheme {
     background: Color(0xFFFFFBFE),
     onBackground: Color(0xFF1C1B1F),
     surface: Color(0xFFFFFBFE),
-    onSurface: Color(0xFF1C1B1F),
+    onSurface: Color.fromARGB(255, 27, 31, 29),
     surfaceVariant: Color(0xFFE7E0EC),
     onSurfaceVariant: Color(0xFF49454F),
     outline: Color(0xFF79747E),
     outlineVariant: Color(0xFFCAC4D0),
     shadow: Color(0xFF000000),
     scrim: Color(0xFF000000),
-    inverseSurface: Color(0xFF313033),
-    inverseOnSurface: Color(0xFFF4EFF4),
+    inverseSurface: Color.fromARGB(255, 48, 51, 48),
+    onInverseSurface: Color(0xFFF4EFF4),
     inversePrimary: Color(0xFFD0BCFF),
-    surfaceTint: Color(0xFF6750A4),
+    surfaceTint: Color.fromARGB(255, 80, 164, 102),
   );
 
   /// Esquema de colores para el tema oscuro
   static const ColorScheme _darkColorScheme = ColorScheme(
     brightness: Brightness.dark,
     primary: Color(0xFFD0BCFF),
-    onPrimary: Color(0xFF381E72),
-    primaryContainer: Color(0xFF4F378B),
+    onPrimary: Color.fromARGB(255, 17, 81, 55),
+    primaryContainer: Color.fromARGB(255, 55, 139, 93),
     onPrimaryContainer: Color(0xFFEADDFF),
     secondary: Color(0xFFCCC2DC),
-    onSecondary: Color(0xFF332D41),
-    secondaryContainer: Color(0xFF4A4458),
+    onSecondary: Color.fromARGB(255, 45, 65, 54),
+    secondaryContainer: Color.fromARGB(255, 68, 88, 77),
     onSecondaryContainer: Color(0xFFE8DEF8),
     tertiary: Color(0xFFEFB8C8),
     onTertiary: Color(0xFF492532),
@@ -76,9 +76,9 @@ class AppTheme {
     shadow: Color(0xFF000000),
     scrim: Color(0xFF000000),
     inverseSurface: Color(0xFFE6E1E5),
-    inverseOnSurface: Color(0xFF313033),
-    inversePrimary: Color(0xFF6750A4),
-    surfaceTint: Color(0xFFD0BCFF),
+    onInverseSurface: Color(0xFF313033),
+    inversePrimary: Color.fromARGB(255, 80, 164, 100),
+    surfaceTint: Color.fromARGB(255, 188, 255, 210),
   );
 
   /// Tema claro de la aplicación con Material 3
@@ -90,13 +90,11 @@ class AppTheme {
         elevation: 0,
         centerTitle: true,
         backgroundColor: Colors.transparent,
-        foregroundColor: Color(0xFF1C1B1F),
+        foregroundColor: Color.fromARGB(255, 27, 31, 27),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 1,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -107,11 +105,12 @@ class AppTheme {
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         filled: true,
-        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: 16,
+        ),
       ),
       navigationBarTheme: NavigationBarThemeData(
         labelTextStyle: MaterialStateProperty.all(
@@ -132,11 +131,9 @@ class AppTheme {
         backgroundColor: Colors.transparent,
         foregroundColor: Color(0xFFE6E1E5),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 1,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -147,11 +144,12 @@ class AppTheme {
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         filled: true,
-        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: 16,
+        ),
       ),
       navigationBarTheme: NavigationBarThemeData(
         labelTextStyle: MaterialStateProperty.all(

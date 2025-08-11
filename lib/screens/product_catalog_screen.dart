@@ -1,5 +1,5 @@
 /// Pantalla de catálogo de productos
-/// 
+///
 /// Esta pantalla muestra los productos organizados por categorías
 /// con una vista más visual y enfocada en la exploración.
 library;
@@ -16,10 +16,7 @@ class ProductCatalogScreen extends StatefulWidget {
   /// Callback para navegar a detalles de producto
   final Function(Product)? onNavigateToProductDetail;
 
-  const ProductCatalogScreen({
-    super.key,
-    this.onNavigateToProductDetail,
-  });
+  const ProductCatalogScreen({super.key, this.onNavigateToProductDetail});
 
   @override
   State<ProductCatalogScreen> createState() => _ProductCatalogScreenState();
@@ -29,16 +26,16 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen>
     with TickerProviderStateMixin {
   /// Servicio de productos
   final ProductService _productService = ProductService();
-  
+
   /// Controlador de tabs
   late TabController _tabController;
-  
+
   /// Mapa de productos por categoría
   Map<String, List<Product>> _productsByCategory = {};
-  
+
   /// Lista de categorías
   List<String> _categories = [];
-  
+
   /// Estado de carga
   bool _isLoading = true;
 
@@ -63,7 +60,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen>
     try {
       final allProducts = await _productService.getAllProducts();
       final categories = _productService.getCategories();
-      
+
       // Organizar productos por categoría
       final productsByCategory = <String, List<Product>>{};
       for (final category in categories) {
@@ -78,12 +75,9 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen>
           _productsByCategory = productsByCategory;
           _isLoading = false;
         });
-        
+
         // Inicializar el TabController después de tener las categorías
-        _tabController = TabController(
-          length: _categories.length,
-          vsync: this,
-        );
+        _tabController = TabController(length: _categories.length, vsync: this);
       }
     } catch (e) {
       if (mounted) {
@@ -91,9 +85,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen>
           _isLoading = false;
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Error al cargar el catálogo'),
-          ),
+          const SnackBar(content: Text('Error al cargar el catálogo')),
         );
       }
     }
@@ -106,12 +98,8 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen>
 
     if (_isLoading) {
       return Scaffold(
-        appBar: AppBar(
-          title: const Text(AppStrings.catalogTitle),
-        ),
-        body: const Center(
-          child: CircularProgressIndicator(),
-        ),
+        appBar: AppBar(title: const Text(AppStrings.catalogTitle)),
+        body: const Center(child: CircularProgressIndicator()),
       );
     }
 
@@ -133,12 +121,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen>
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                subtitle: Text(
-                  AppStrings.catalogDescription,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.onSurfaceVariant,
-                  ),
-                ),
+
                 background: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -165,7 +148,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen>
                 ),
               ),
             ),
-            
+
             // Tabs de categorías
             if (_categories.isNotEmpty)
               SliverPersistentHeader(
@@ -179,10 +162,12 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen>
                     unselectedLabelColor: colorScheme.onSurfaceVariant,
                     indicatorColor: colorScheme.primary,
                     tabs: _categories
-                        .map((category) => Tab(
-                              text: category,
-                              icon: _getCategoryIcon(category),
-                            ))
+                        .map(
+                          (category) => Tab(
+                            text: category,
+                            icon: _getCategoryIcon(category),
+                          ),
+                        )
                         .toList(),
                   ),
                 ),
@@ -220,7 +205,9 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen>
               child: Container(
                 padding: const EdgeInsets.all(AppConstants.paddingLarge),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.surfaceVariant.withOpacity(0.3),
                   borderRadius: BorderRadius.circular(AppConstants.radiusLarge),
                 ),
                 child: Column(
@@ -232,9 +219,8 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen>
                         const SizedBox(width: AppConstants.paddingSmall),
                         Text(
                           category,
-                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context).textTheme.headlineSmall
+                              ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -263,16 +249,13 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen>
                 crossAxisSpacing: AppConstants.paddingMedium,
                 mainAxisSpacing: AppConstants.paddingMedium,
               ),
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final product = products[index];
-                  return ProductCard(
-                    product: product,
-                    onTap: () => widget.onNavigateToProductDetail?.call(product),
-                  );
-                },
-                childCount: products.length,
-              ),
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final product = products[index];
+                return ProductCard(
+                  product: product,
+                  onTap: () => widget.onNavigateToProductDetail?.call(product),
+                );
+              }, childCount: products.length),
             ),
           ),
 
@@ -350,7 +333,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen>
   /// Obtiene el icono para una categoría
   Widget _getCategoryIcon(String category, {double size = 24}) {
     final colorScheme = Theme.of(context).colorScheme;
-    
+
     IconData iconData;
     switch (category.toLowerCase()) {
       case 'electrónicos':
@@ -383,11 +366,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen>
         iconData = Icons.category;
     }
 
-    return Icon(
-      iconData,
-      size: size,
-      color: colorScheme.primary,
-    );
+    return Icon(iconData, size: size, color: colorScheme.primary);
   }
 }
 
